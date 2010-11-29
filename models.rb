@@ -47,6 +47,12 @@ def should_have_attached_file(name, opts = {})
   end
 end
 
+def should_be_a_tagger
+  it "should be a tagger" do
+    subject.class.should be_is_tagger
+  end
+end
+
 def should_be_taggable
   it "should be taggable" do
     subject.class.should be_taggable
