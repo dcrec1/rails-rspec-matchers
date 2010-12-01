@@ -9,6 +9,13 @@ def should_require_authentication_on_private_actions
       end
     end
 
+    describe "GET edit" do
+      it "should return 302 as the status code"  do
+        get :edit
+        response.code.should eql("302")
+      end
+    end
+
     describe "POST create" do
       it "should return 302 as the status code"  do
         post :create
