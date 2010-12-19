@@ -187,3 +187,14 @@ def with_a_logged_user(&block)
     instance_eval &block
   end
 end
+
+def post_create_should_set_the_current_user_as_the_owner
+  describe "POST create" do
+    it "should set the current user as the owner" do
+      model = described_class.to_s.gsub("Controller", "").underscore.singularize
+      params = Factory.build(model, :user_id => Factory(:user).id).attributes
+      post :create, model => params
+      assigns(model.to_sym).user.should == user
+    end
+  end
+end
