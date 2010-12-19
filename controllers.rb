@@ -167,3 +167,23 @@ def should_have_only_public_actions
     end
   end
 end
+
+def without_a_logged_user(&block)
+  context "without a logged user" do
+    instance_eval &block
+  end
+end
+
+def with_a_logged_user(&block)
+  include Devise::TestHelpers
+
+  context "with a logged user" do
+    let(:user) { Factory :user }
+
+    before :each do
+      sign_in user
+    end
+
+    instance_eval &block
+  end
+end
