@@ -1,3 +1,11 @@
+def with_a_record(&block)
+  describe "with a record" do
+    before(:each) { Factory subject.class.to_s.underscore }
+
+    instance_eval &block
+  end
+end  
+
 def should_be_delivered_on_creation_with(clazz)
   context "on creation" do
     it "should be send on an email" do
