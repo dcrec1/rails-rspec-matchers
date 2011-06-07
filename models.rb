@@ -101,6 +101,14 @@ def should_change(opts)
   end
 end
 
+def should_be_soft_deleted
+  it "should be soft deleted" do
+    object = Factory subject.class.to_s.underscore
+    object.destroy
+    subject.class.only_deleted.find(object.id).should_not be_nil
+  end
+end
+
 def should_be_versioned
   it "should be versioned" do
     subject.class.should be_versioned
