@@ -198,3 +198,13 @@ def post_create_should_set_the_current_user_as_the_owner
     end
   end
 end
+
+def should_respond_to_js
+  it "should respond as javascript" do
+    association = described_class.to_s.gsub("Controller", "").underscore
+    model = association.split("/").last.singularize
+    params = Factory.build(model).attributes
+    post :create, model => params, :format => :js
+    response.should render_template("#{association}/create")
+  end
+end
